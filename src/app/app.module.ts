@@ -16,11 +16,13 @@ import { FormsModule } from '@angular/forms';
 
 import { DatePipe } from '@angular/common';
 import { ConfigService, configServiceLoadConfig } from './config/config.service';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
     declarations: [
         AppComponent,
-        MetarComponent
+        MetarComponent,
+        HomeComponent
     ],
     imports: [
         BrowserModule,
