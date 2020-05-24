@@ -1,0 +1,34 @@
+<!-- <div style="width: 80%"> -->
+<div>
+    <p-autoComplete [(ngModel)]="stationIds" [suggestions]="stationIdResults"
+        (completeMethod)="searchStationIds($event)" [multiple]="true"></p-autoComplete>
+
+    <p-calendar [(ngModel)]="fromObservationTime" name="fromObservationTime" id="fromObservationTime"
+        #fromObservationTimeField="ngModel" [monthNavigator]="true" showButtonBar="true" [yearNavigator]="true"
+        yearRange="2000:2050" [dateFormat]="'yy-mm-dd'" [showIcon]="true" [readonlyInput]="true" [showOnFocus]="false"
+        style="margin-left: 1rem;">
+    </p-calendar>
+
+
+    <button pButton type="button" icon="pi pi-plus" (click)="getMetars()" label="Get"
+        style="margin-left: 1rem;"></button>
+</div>
+<div style="margin-top: 1rem;">
+    <p-table [value]="metarArray" autoLayout="true">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Station</th>
+                <th>Observation</th>
+                <th>Metar</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-metar>
+            <tr>
+                <td>{{ metar.stationId }}</td>
+                <td>{{ metar.observationTime }}</td>
+                <td>{{ metar.rawText }}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+<!-- </div> -->
