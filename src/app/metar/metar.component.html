@@ -1,19 +1,61 @@
-<!-- <div style="width: 80%"> -->
-<div>
-    <p-autoComplete [(ngModel)]="stationIds" [suggestions]="stationIdResults"
-        (completeMethod)="searchStationIds($event)" [multiple]="true"></p-autoComplete>
+<p-tabView>
+    <p-tabPanel header="Latest">
+        <div class="p-grid">
+            <div class="p-col-2" style="margin-top: 0.3rem;">
+                <label for="stationIds">Station ID(s):</label>
+            </div>
+            <div class="p-col-10">
+                <p-autoComplete id="stationIds" [(ngModel)]="stationIds" [suggestions]="stationIdResults"
+                    (completeMethod)="searchStationIds($event)" [multiple]="true"></p-autoComplete>
+            </div>
+            <div class="p-col-2" style="margin-top: 0.3rem;">
+                <label for="numberOfObersvations"># Observations:</label>
+            </div>
+            <div class="p-col-10">
+                <input type="text" pInputText id="numberOfObersvations" [(ngModel)]="numberOfObersvations" />
+            </div>
+            <div class="p-col-1">
+                <button pButton type="button" icon="pi pi-plus" (click)="getMetars()" label="Get"></button>
+            </div>
+        </div>
+    </p-tabPanel>
+    <p-tabPanel header="Date Range">
+        <div class="p-grid">
+            <div class="p-col-1" style="margin-top: 0.3rem;">
+                <label for="stationIds">Station ID(s):</label>
+            </div>
+            <div class="p-col-11">
+                <p-autoComplete id="stationIds" [(ngModel)]="stationIds" [suggestions]="stationIdResults"
+                    (completeMethod)="searchStationIds($event)" [multiple]="true"></p-autoComplete>
+            </div>
+            <div class="p-col-1" style="margin-top: 0.3rem;">
+                <label for="fromObservationTime">From date:</label>
+            </div>
+            <div class="p-col-3">
+                <p-calendar [(ngModel)]="fromObservationTime" name="fromObservationTime" id="fromObservationTime"
+                    #fromObservationTimeField="ngModel" [monthNavigator]="true" showButtonBar="true"
+                    [yearNavigator]="true" yearRange="2000:2050" [dateFormat]="'yy-mm-dd'" [showIcon]="true"
+                    [readonlyInput]="true" [showOnFocus]="false">
+                </p-calendar>
+            </div>
+            <div class="p-col-1" style="margin-top: 0.3rem;">
+                <label for="toObservationTime">To date:</label>
+            </div>
+            <div class="p-col-7">
+                <p-calendar [(ngModel)]="toObservationTime" name="toObservationTime" id="toObservationTime"
+                    #fromObservationTimeField="ngModel" [monthNavigator]="true" showButtonBar="true"
+                    [yearNavigator]="true" yearRange="2000:2050" [dateFormat]="'yy-mm-dd'" [showIcon]="true"
+                    [readonlyInput]="true" [showOnFocus]="false">
+                </p-calendar>
+            </div>
+            <div class="p-col-1">
+                <button pButton type="button" icon="pi pi-plus" (click)="getMetars()" label="Get"></button>
+            </div>
+        </div>
 
-    <p-calendar [(ngModel)]="fromObservationTime" name="fromObservationTime" id="fromObservationTime"
-        #fromObservationTimeField="ngModel" [monthNavigator]="true" showButtonBar="true" [yearNavigator]="true"
-        yearRange="2000:2050" [dateFormat]="'yy-mm-dd'" [showIcon]="true" [readonlyInput]="true" [showOnFocus]="false"
-        style="margin-left: 1rem;">
-    </p-calendar>
-
-
-    <button pButton type="button" icon="pi pi-plus" (click)="getMetars()" label="Get"
-        style="margin-left: 1rem;"></button>
-</div>
-<div style="margin-top: 1rem;">
+    </p-tabPanel>
+</p-tabView>
+<div style="margin-top: 3rem;">
     <p-table [value]="metarArray" autoLayout="true">
         <ng-template pTemplate="header">
             <tr>
@@ -25,7 +67,7 @@
         <ng-template pTemplate="body" let-metar>
             <tr>
                 <td>{{ metar.stationId }}</td>
-                <td>{{ metar.observationTime }}</td>
+                <td>{{ metar.observationTime | date:"dd/MM/yyyy HH:mm" }}</td>
                 <td>{{ metar.rawText }}</td>
             </tr>
         </ng-template>

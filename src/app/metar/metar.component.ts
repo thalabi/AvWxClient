@@ -17,6 +17,9 @@ export class MetarComponent implements OnInit {
     stationIdResults: Array<string>;
 
     fromObservationTime: Date;
+    toObservationTime: Date;
+
+    numberOfObersvations: number;
 
     constructor(private metarService: MetarService) { }
 
@@ -47,7 +50,7 @@ export class MetarComponent implements OnInit {
 
     public getMetars() {
         console.log(this.stationIds);
-        this.metarService.getMetarList(this.stationIds, this.fromObservationTime).subscribe({
+        this.metarService.getMetarList(this.stationIds, this.fromObservationTime, this.toObservationTime).subscribe({
             //this.metarService.ping(null, null).subscribe({
             next: rowResponse => {
                 console.log('metar rowResponse: ', rowResponse);

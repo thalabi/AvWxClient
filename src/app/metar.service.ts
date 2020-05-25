@@ -29,10 +29,11 @@ export class MetarService {
         //return null;
     }
 
-    getMetarList(stationIds: Array<string>, fromObservationTime: Date): Observable<Array<Metar>> {
+    getMetarList(stationIds: Array<string>, fromObservationTime: Date, toObservationTime: Date): Observable<Array<Metar>> {
         let stationIdsConcatenated: string = stationIds.join("&stationId=");
         let fromObservationTimeString = this.datePipe.transform(fromObservationTime, "yyyy-MM-dd");
-        let url: string = `${this.serviceUrl}/get2?stationId=${stationIdsConcatenated}&fromObservationTime=${fromObservationTimeString}&toObservationTime=2020-12-31`;
+        let toObservationTimeString = this.datePipe.transform(toObservationTime, "yyyy-MM-dd");
+        let url: string = `${this.serviceUrl}/get2?stationId=${stationIdsConcatenated}&fromObservationTime=${fromObservationTimeString}&toObservationTime=${toObservationTimeString}`;
         console.log(url);
         return this.httpClient.get<Array<Metar>>(url);
         //return null;

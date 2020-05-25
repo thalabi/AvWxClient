@@ -13,6 +13,8 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
 import { FormsModule } from '@angular/forms';
+import { TabViewModule } from 'primeng/tabview';
+import { InputTextModule } from 'primeng/inputtext';
 
 import { DatePipe } from '@angular/common';
 import { ConfigService, configServiceLoadConfig } from './config/config.service';
@@ -30,7 +32,7 @@ import { HomeComponent } from './home/home.component';
         HttpClientModule,
         FormsModule,
 
-        BrowserAnimationsModule, TableModule, AutoCompleteModule, ButtonModule, CalendarModule,
+        BrowserAnimationsModule, TableModule, AutoCompleteModule, ButtonModule, CalendarModule, TabViewModule, InputTextModule,
     ],
     providers: [
         MetarService, DatePipe, ConfigService,
