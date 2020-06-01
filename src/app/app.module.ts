@@ -19,12 +19,20 @@ import { InputTextModule } from 'primeng/inputtext';
 import { DatePipe } from '@angular/common';
 import { ConfigService, configServiceLoadConfig } from './config/config.service';
 import { HomeComponent } from './home/home.component';
+import { MetarStationIdMvService } from './service/metar-station-id-mv.service';
+import { CloudBasePipe } from './util/cload-base-pipe';
+import { RemarkPipe } from './util/remark-pipe';
+import { TooltipModule } from 'primeng/tooltip';
+import { WindDirectionPipe } from './util/wind-direction-pipe';
 
 @NgModule({
     declarations: [
         AppComponent,
         MetarComponent,
-        HomeComponent
+        HomeComponent,
+        CloudBasePipe,
+        RemarkPipe,
+        WindDirectionPipe
     ],
     imports: [
         BrowserModule,
@@ -32,10 +40,10 @@ import { HomeComponent } from './home/home.component';
         HttpClientModule,
         FormsModule,
 
-        BrowserAnimationsModule, TableModule, AutoCompleteModule, ButtonModule, CalendarModule, TabViewModule, InputTextModule,
+        BrowserAnimationsModule, TableModule, AutoCompleteModule, ButtonModule, CalendarModule, TabViewModule, InputTextModule, TooltipModule,
     ],
     providers: [
-        MetarService, DatePipe, ConfigService,
+        MetarService, MetarStationIdMvService, DatePipe, ConfigService,
         { provide: APP_INITIALIZER, useFactory: configServiceLoadConfig, deps: [ConfigService], multi: true },
 
     ],

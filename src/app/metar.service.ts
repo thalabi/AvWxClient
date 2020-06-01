@@ -29,11 +29,19 @@ export class MetarService {
         //return null;
     }
 
-    getMetarList(stationIds: Array<string>, fromObservationTime: Date, toObservationTime: Date): Observable<Array<Metar>> {
+    getMetarListForLatestNObservations(stationIds: Array<string>, numberOfObersvations: number): Observable<Array<Metar>> {
+        let stationIdsConcatenated: string = stationIds.join("&stationId=");
+        let url: string = `${this.serviceUrl}/getMetarListForLatestNObservations?stationId=${stationIdsConcatenated}&latestNumberOfMetars=${numberOfObersvations}`;
+        console.log(url);
+        return this.httpClient.get<Array<Metar>>(url);
+        //return null;
+    }
+
+    getMetarListInObervationTimeRange(stationIds: Array<string>, fromObservationTime: Date, toObservationTime: Date): Observable<Array<Metar>> {
         let stationIdsConcatenated: string = stationIds.join("&stationId=");
         let fromObservationTimeString = this.datePipe.transform(fromObservationTime, "yyyy-MM-dd");
         let toObservationTimeString = this.datePipe.transform(toObservationTime, "yyyy-MM-dd");
-        let url: string = `${this.serviceUrl}/get2?stationId=${stationIdsConcatenated}&fromObservationTime=${fromObservationTimeString}&toObservationTime=${toObservationTimeString}`;
+        let url: string = `${this.serviceUrl}/getMetarListInObervationTimeRange?stationId=${stationIdsConcatenated}&fromObservationTime=${fromObservationTimeString}&toObservationTime=${toObservationTimeString}`;
         console.log(url);
         return this.httpClient.get<Array<Metar>>(url);
         //return null;
