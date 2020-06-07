@@ -49,7 +49,7 @@ pipeline {
 			}
             steps {
                 sh '''
-                jar -cvf AvWxClient-${BRANCH_NAME}.jar dist
+                jar -cvf AvWxClient-${BRANCH_NAME}.jar dist/AvWx
                 '''
             }
 		}
