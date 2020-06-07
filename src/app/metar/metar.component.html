@@ -4,14 +4,25 @@
             <div class="p-col-1" style="margin-top: 0.3rem;">
                 <label for="stationIds">Station ID(s):</label>
             </div>
-            <div class="p-col-11">
+            <div class="p-col-6">
                 <p-autoComplete id="stationIds" [(ngModel)]="metarStationIdMvs" [suggestions]="metarStationIdMvResults"
                     (completeMethod)="searchStationIds($event)" field="stationId" [multiple]="true">
                     <ng-template let-metarStationIdMv pTemplate="item">
                         {{metarStationIdMv.stationId}} - {{metarStationIdMv.name}}
                     </ng-template>
                 </p-autoComplete>
+                <button pButton type="button" icon="pi pi-minus" (click)="clearMetarStationIdMvs()" label="Clear"
+                    style="margin-left: 0.2rem;" [disabled]="!metarStationIdMvs || !metarStationIdMvs.length"></button>
+
             </div>
+
+            <div class="p-col-5">
+                <app-station-id-set [metarStationIdMvArrayCache]=metarStationIdMvArrayCache
+                    [(metarStationIdMvs)]="metarStationIdMvs" [(stationIdSetName)]="stationIdSetName"
+                    [(foundSavedStationIdSet)]="foundSavedStationIdSet" id="0">
+                </app-station-id-set>
+            </div>
+
             <div class="p-col-1" style="margin-top: 0.3rem;">
                 <label for="numberOfObersvations">Latest:</label>
             </div>
@@ -30,13 +41,21 @@
             <div class="p-col-1" style="margin-top: 0.3rem;">
                 <label for="stationIds">Station ID(s):</label>
             </div>
-            <div class="p-col-11">
+            <div class="p-col-6">
                 <p-autoComplete id="stationIds" [(ngModel)]="metarStationIdMvs" [suggestions]="metarStationIdMvResults"
                     (completeMethod)="searchStationIds($event)" field="stationId" [multiple]="true">
                     <ng-template let-metarStationIdMv pTemplate="item">
                         {{metarStationIdMv.stationId}} - {{metarStationIdMv.name}}
                     </ng-template>
                 </p-autoComplete>
+                <button pButton type="button" icon="pi pi-minus" (click)="clearMetarStationIdMvs()" label="Clear"
+                    style="margin-left: 0.2rem;" [disabled]="!metarStationIdMvs || !metarStationIdMvs.length"></button>
+            </div>
+            <div class="p-col-5">
+                <app-station-id-set [metarStationIdMvArrayCache]=metarStationIdMvArrayCache
+                    [(metarStationIdMvs)]="metarStationIdMvs" [(stationIdSetName)]="stationIdSetName"
+                    [(foundSavedStationIdSet)]="foundSavedStationIdSet" id="1">
+                </app-station-id-set>
             </div>
             <div class="p-col-1" style="margin-top: 0.3rem;">
                 <label for="fromObservationTime">From date:</label>
@@ -59,7 +78,7 @@
                 </p-calendar>
             </div>
             <div class="p-col-1">
-                <button pButton type="button" icon="pi pi-plus" (click)="getMetars()" label="Get"
+                <button pButton type="button" icon="pi pi-search" (click)="getMetars()" label="Get"
                     [disabled]="! metarStationIdMvs || metarStationIdMvs.length == 0 || toObservationTime &lt; fromObservationTime"></button>
             </div>
         </div>

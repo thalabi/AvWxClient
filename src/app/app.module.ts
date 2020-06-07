@@ -24,6 +24,10 @@ import { CloudBasePipe } from './util/cload-base-pipe';
 import { RemarkPipe } from './util/remark-pipe';
 import { TooltipModule } from 'primeng/tooltip';
 import { WindDirectionPipe } from './util/wind-direction-pipe';
+import { DropdownModule } from 'primeng/dropdown';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+import { StationIdSetComponent } from './station-id-set/station-id-set.component';
 
 @NgModule({
     declarations: [
@@ -32,7 +36,8 @@ import { WindDirectionPipe } from './util/wind-direction-pipe';
         HomeComponent,
         CloudBasePipe,
         RemarkPipe,
-        WindDirectionPipe
+        WindDirectionPipe,
+        StationIdSetComponent
     ],
     imports: [
         BrowserModule,
@@ -40,10 +45,10 @@ import { WindDirectionPipe } from './util/wind-direction-pipe';
         HttpClientModule,
         FormsModule,
 
-        BrowserAnimationsModule, TableModule, AutoCompleteModule, ButtonModule, CalendarModule, TabViewModule, InputTextModule, TooltipModule,
+        BrowserAnimationsModule, TableModule, AutoCompleteModule, ButtonModule, CalendarModule, TabViewModule, InputTextModule, TooltipModule, DropdownModule, ToastModule
     ],
     providers: [
-        MetarService, MetarStationIdMvService, DatePipe, ConfigService,
+        MetarService, MetarStationIdMvService, DatePipe, ConfigService, MessageService,
         { provide: APP_INITIALIZER, useFactory: configServiceLoadConfig, deps: [ConfigService], multi: true },
 
     ],

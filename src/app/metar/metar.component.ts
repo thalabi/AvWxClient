@@ -1,10 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { MetarService } from '../metar.service';
 import { Metar } from '../metar';
 import { ɵBrowserDomAdapter } from '@angular/platform-browser';
 import { MetarStationIdMvService } from '../service/metar-station-id-mv.service';
 import { MetarStationIdMv } from '../model/metar_station_id_mv';
 import { query } from '@angular/animations';
+import { StationIdSet } from '../model/station_id_set';
+import { SelectItem } from 'primeng/api/selectitem';
+import { MessageService } from 'primeng/api';
+import { StationIdSetComponent } from '../station-id-set/station-id-set.component';
+import { NgModel } from '@angular/forms';
 
 @Component({
     selector: 'app-metar',
@@ -29,17 +34,35 @@ export class MetarComponent implements OnInit {
 
     loadingFlag: boolean;
 
-    constructor(private metarService: MetarService, private metarStationIdMvService: MetarStationIdMvService) { }
+    savedstationIdSetNames: SelectItem[];
+    stationIdSetName: string;
+
+    foundSavedStationIdSet: boolean;
+
+    savedStationIdSets: Array<StationIdSet>;
+
+    @ViewChildren(StationIdSetComponent) stationIdSetComponentReferences: QueryList<StationIdSetComponent>;
+
+    constructor(private metarService: MetarService, private metarStationIdMvService: MetarStationIdMvService, private messageService: MessageService) { }
 
     ngOnInit(): void {
         this.metarArray = new Array<Metar>();
         this.fromObservationTime = new Date();
         this.toObservationTime = new Date();
-        this.metarStationIdMvs = JSON.parse(localStorage.getItem('metarStationIdMvs'));
+        this.savedStationIdSets = JSON.parse(localStorage.getItem('stationIdSets'));
+        if (this.savedStationIdSets) {
+            this.initSavedstationIdSetNames();
+            this.stationIdSetName = "";
+        } else {
+            this.savedStationIdSets = new Array<StationIdSet>();
+        }
+        console.log('this.savedStationIdSets', this.savedStationIdSets)
+        console.log('this.savedstationIdSetNames', this.savedstationIdSetNames)
         this.numberOfObersvations = +localStorage.getItem('numberOfObersvations');
         if (! /* not */ this.numberOfObersvations) {
             this.numberOfObersvations = 3;
         }
+
         this.metarStationIdMvService.getStationIds().subscribe({
             next: rowResponse => {
                 console.log('metar rowResponse: ', rowResponse);
@@ -51,6 +74,14 @@ export class MetarComponent implements OnInit {
             }
         });
         this.panelNumberSelected = MetarRetrievalMethodEnum.Latest;
+    }
+
+    private initSavedstationIdSetNames() {
+        this.savedstationIdSetNames = this.savedStationIdSets.map(savedStationIdSet => {
+            return { label: savedStationIdSet.name, value: savedStationIdSet.name };
+        });
+        this.savedstationIdSetNames.sort((a, b) => (a.label < b.label ? -1 : 1));
+
     }
 
     public searchStationIds(event: { originalEvent: InputEvent, query: string }) {
@@ -72,7 +103,6 @@ export class MetarComponent implements OnInit {
         let stationIds: Array<string> = this.metarStationIdMvs.map(metarStationIdMv => {
             return metarStationIdMv.stationId;
         });
-        localStorage.setItem('metarStationIdMvs', JSON.stringify(this.metarStationIdMvs));
         switch (this.panelNumberSelected) {
             case MetarRetrievalMethodEnum.Latest:
                 localStorage.setItem('numberOfObersvations', this.numberOfObersvations.toString());
@@ -115,6 +145,17 @@ export class MetarComponent implements OnInit {
         this.panelNumberSelected = MetarRetrievalMethodEnum[MetarRetrievalMethodEnum[event.index]];
         console.log(this.panelNumberSelected);
         this.metarArray = new Array<Metar>();
+
+        // refresh child component from localstorage
+        let stationIdSetComponent = this.stationIdSetComponentReferences.find(stationIdSetComponent => stationIdSetComponent.id == event.index);
+        if (stationIdSetComponent) {
+            console.log('found stationIdSetComponent');
+            stationIdSetComponent.refreshFromLocalStorage();
+        }
+    }
+
+    public clearMetarStationIdMvs() {
+        this.metarStationIdMvs.length = 0;
     }
 }
 

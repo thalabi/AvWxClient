@@ -17,3 +17,9 @@
 @keyframes blinker-two {  
     100% { opacity: 0; }
 }
+
+
+:host ::ng-deep .custom-toast .ui-toast-message {
+    display: flex;
+    width: 14rem;
+}
