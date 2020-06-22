@@ -4,6 +4,7 @@
 
 export const environment = {
     production: false,
+    buildVersion: "@buildVersion@",
     buildTimestamp: "@buildTimestamp@"
 };
 
