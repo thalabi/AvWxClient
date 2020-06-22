@@ -5,7 +5,9 @@ import { HomeComponent } from './home/home.component';
 
 
 const routes: Routes = [
-    { path: '', component: HomeComponent },
+    //{ path: '', component: HomeComponent },
+    { path: '', redirectTo: '/metar', pathMatch: 'full' },
+    { path: 'home', component: HomeComponent },
     { path: 'metar', component: MetarComponent },
 ];
 
