@@ -1,0 +1,6 @@
+::ng-deep .version-info-tooltip .ui-tooltip-text {
+    white-space: pre;
+}
+::ng-deep .ui-tooltip {
+    max-width: none;
+}

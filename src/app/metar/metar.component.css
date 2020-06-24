@@ -23,3 +23,10 @@
     display: flex;
     width: 14rem;
 }
+
+::ng-deep .observation-time-tooltip .ui-tooltip-text {
+    white-space: pre;
+}
+::ng-deep .ui-tooltip {
+    max-width: none;
+}

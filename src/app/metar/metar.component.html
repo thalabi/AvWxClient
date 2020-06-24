@@ -149,7 +149,7 @@
         <ng-template pTemplate="body" let-metar>
             <tr>
                 <td>{{ metar.stationId }}</td>
-                <td><span [pTooltip]="metar.rawText" tooltipPosition="top"
+                <td><span [pTooltip]="metar.rawText" tooltipStyleClass="observation-time-tooltip" tooltipPosition="top"
                         style="border-bottom: 1px blue dashed">{{ metar.observationTime | date:"yyyy-MM-dd HH:mm" }}</span>
                 </td>
                 <td><span *ngIf="metar.auto">AUTO</span></td>
@@ -158,15 +158,17 @@
                 <td>{{ metar.visibilityStatuteMi }}</td>
                 <td>{{ metar.wxString }}</td>
                 <td>
-                    <span *ngIf="metar.vertVisFt">VV{{ metar.vertVisFt }}</span>
+                    <!-- <span *ngIf="metar.vertVisFt">VV{{ metar.vertVisFt }}</span>
+                    <span>{{ metar.skyCover1 }}</span>
                     <span
-                        *ngIf="!metar.vertVisFt && metar.cloudBaseFtAgl1">{{ metar.skyCover1 }}{{ metar.cloudBaseFtAgl1 | cloudBase }}</span>
+                        *ngIf="!metar.vertVisFt && metar.cloudBaseFtAgl1">{{ metar.cloudBaseFtAgl1 | cloudBase }}</span>
                     <span
                         *ngIf="!metar.vertVisFt && metar.cloudBaseFtAgl2">&nbsp;{{ metar.skyCover2 }}{{ metar.cloudBaseFtAgl2 | cloudBase }}</span>
                     <span
                         *ngIf="!metar.vertVisFt && metar.cloudBaseFtAgl3">&nbsp;{{ metar.skyCover3 }}{{ metar.cloudBaseFtAgl3 | cloudBase }}</span>
                     <span
-                        *ngIf="!metar.vertVisFt && metar.cloudBaseFtAgl4">&nbsp;{{ metar.skyCover4 }}{{ metar.cloudBaseFtAgl4 | cloudBase }}</span>
+                        *ngIf="!metar.vertVisFt && metar.cloudBaseFtAgl4">&nbsp;{{ metar.skyCover4 }}{{ metar.cloudBaseFtAgl4 | cloudBase }}</span> -->
+                    <span style="white-space: pre">{{metar | skyCondition}}</span>
                 </td>
                 <td>{{ metar.tempC }}/{{ metar.dewpointC }}</td>
                 <td>{{ metar.altimInHg | number:'2.2-2'}}</td>

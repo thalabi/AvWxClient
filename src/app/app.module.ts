@@ -20,7 +20,6 @@ import { DatePipe } from '@angular/common';
 import { ConfigService, configServiceLoadConfig } from './config/config.service';
 import { HomeComponent } from './home/home.component';
 import { MetarStationIdMvService } from './service/metar-station-id-mv.service';
-import { CloudBasePipe } from './util/cload-base-pipe';
 import { RemarkPipe } from './util/remark-pipe';
 import { TooltipModule } from 'primeng/tooltip';
 import { WindDirectionPipe } from './util/wind-direction-pipe';
@@ -28,15 +27,16 @@ import { DropdownModule } from 'primeng/dropdown';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { StationIdSetComponent } from './station-id-set/station-id-set.component';
+import { SkyConditionPipe } from './util/sky-condition-pipe';
 
 @NgModule({
     declarations: [
         AppComponent,
         MetarComponent,
         HomeComponent,
-        CloudBasePipe,
         RemarkPipe,
         WindDirectionPipe,
+        SkyConditionPipe,
         StationIdSetComponent
     ],
     imports: [
