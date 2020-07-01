@@ -6,9 +6,10 @@ import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
     //{ path: '', component: HomeComponent },
-    { path: '', redirectTo: '/metar', pathMatch: 'full' },
-    { path: 'home', component: HomeComponent },
-    { path: 'metar', component: MetarComponent },
+    //{ path: '', redirectTo: '/metar', pathMatch: 'full' },
+    { path: '', component: MetarComponent },
+    //{ path: 'home', component: HomeComponent },
+    //{ path: 'metar', component: MetarComponent },
 ];
 
 @NgModule({
