@@ -15,6 +15,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { FormsModule } from '@angular/forms';
 import { TabViewModule } from 'primeng/tabview';
 import { InputTextModule } from 'primeng/inputtext';
+import { DialogModule } from 'primeng/dialog';
 
 import { DatePipe } from '@angular/common';
 import { ConfigService, configServiceLoadConfig } from './config/config.service';
@@ -28,6 +29,7 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { StationIdSetComponent } from './station-id-set/station-id-set.component';
 import { SkyConditionPipe } from './util/sky-condition-pipe';
+import { LoginPanelComponent } from './security/login-panel/login-panel.component';
 
 @NgModule({
     declarations: [
@@ -37,7 +39,8 @@ import { SkyConditionPipe } from './util/sky-condition-pipe';
         RemarkPipe,
         WindDirectionPipe,
         SkyConditionPipe,
-        StationIdSetComponent
+        StationIdSetComponent,
+        LoginPanelComponent
     ],
     imports: [
         BrowserModule,
@@ -45,7 +48,7 @@ import { SkyConditionPipe } from './util/sky-condition-pipe';
         HttpClientModule,
         FormsModule,
 
-        BrowserAnimationsModule, TableModule, AutoCompleteModule, ButtonModule, CalendarModule, TabViewModule, InputTextModule, TooltipModule, DropdownModule, ToastModule
+        BrowserAnimationsModule, TableModule, AutoCompleteModule, ButtonModule, CalendarModule, TabViewModule, InputTextModule, TooltipModule, DropdownModule, ToastModule, DialogModule
     ],
     providers: [
         MetarService, MetarStationIdMvService, DatePipe, ConfigService, MessageService,

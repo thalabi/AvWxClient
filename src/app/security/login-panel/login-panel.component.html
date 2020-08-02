@@ -1,0 +1,25 @@
+<p-dialog header="Login" [(visible)]="visible" modal="true">
+    <form (ngSubmit)="loginFormSubmit()" #loginForm="ngForm">
+
+        <div class="p-grid">
+            <div class="p-col-2">
+                <label for="username">Username</label>
+            </div>
+            <div class="p-col-10">
+                <input type="text" pInputText name="username" id="username" [(ngModel)]="userDetails.username"
+                    #username="ngModel" required>
+                <div [hidden]="username.valid || username.pristine" class="red-font">Username is required</div>
+            </div>
+            <div class="p-col-2">
+                <label for="password">Password</label>
+            </div>
+            <div class="p-col-10">
+                <input type="password" name="password" id="password" [(ngModel)]="userDetails.password"
+                    #password="ngModel" required />
+                <div [hidden]="password.valid || password.pristine" class="red-font">Password is required</div>
+            </div>
+        </div>
+        <button pButton type="submit" label="Login" [disabled]="!loginForm.valid" *ngIf="!isProcessingRequest"></button>
+
+    </form>
+</p-dialog>

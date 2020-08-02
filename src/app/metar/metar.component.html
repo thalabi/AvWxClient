@@ -1,3 +1,6 @@
+<app-login-panel [(userDetails)]="userDetails"></app-login-panel>
+<div style="float: right; margin-right: 0.2rem; margin-top: 0.6rem"><button pButton type="button" icon="pi pi-sign-in"
+        (click)="toggleLoginPanel()" [label]="loginButtonLabel"></button></div>
 <p-tabView (onChange)="setPanelNumberSelected($event)">
     <p-tabPanel header=" Latest">
         <div class="p-grid">
@@ -85,6 +88,8 @@
 
     </p-tabPanel>
 </p-tabView>
+
+
 <div *ngIf="loadingFlag"><i class="blink-two">Retrieving data ...</i></div>
 <div style="margin-top: 0.5rem;">
     <p-table *ngIf="metarArray?.length" [value]="metarArray" [scrollable]="true" scrollHeight="24rem"

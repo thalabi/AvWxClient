@@ -10,6 +10,7 @@ import { SelectItem } from 'primeng/api/selectitem';
 import { MessageService } from 'primeng/api';
 import { StationIdSetComponent } from '../station-id-set/station-id-set.component';
 import { NgModel } from '@angular/forms';
+import { LoginPanelComponent } from '../security/login-panel/login-panel.component';
 
 @Component({
     selector: 'app-metar',
@@ -41,7 +42,12 @@ export class MetarComponent implements OnInit {
 
     savedStationIdSets: Array<StationIdSet>;
 
+    userDetails: any = {};
+    loginButtonLabel: string;
+
     @ViewChildren(StationIdSetComponent) stationIdSetComponentReferences: QueryList<StationIdSetComponent>;
+
+    @ViewChild(LoginPanelComponent) loginPanelComponent: LoginPanelComponent;
 
     constructor(private metarService: MetarService, private metarStationIdMvService: MetarStationIdMvService, private messageService: MessageService) { }
 
@@ -74,6 +80,8 @@ export class MetarComponent implements OnInit {
             }
         });
         this.panelNumberSelected = MetarRetrievalMethodEnum.Latest;
+
+        this.loginButtonLabel = "Login";
     }
 
     private initSavedstationIdSetNames() {
@@ -156,6 +164,10 @@ export class MetarComponent implements OnInit {
 
     public clearMetarStationIdMvs() {
         this.metarStationIdMvs.length = 0;
+    }
+
+    public toggleLoginPanel() {
+        this.loginPanelComponent.showForm();
     }
 }
 
