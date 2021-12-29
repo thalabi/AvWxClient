@@ -38,7 +38,7 @@ pipeline {
                 pwd
                 cd ../..
                 pwd
-                npm install && ng build --prod --base-href=/AvWx/
+                npm install && node_modules/.bin/ng build
                 #jar -cvf FlightLogClient.jar dist
                 '''
             }
