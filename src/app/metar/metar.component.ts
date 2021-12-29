@@ -11,6 +11,8 @@ import { MessageService } from 'primeng/api';
 import { StationIdSetComponent } from '../station-id-set/station-id-set.component';
 import { NgModel } from '@angular/forms';
 import { LoginPanelComponent } from '../security/login-panel/login-panel.component';
+import { User } from '../security/user';
+import { SessionDataService } from '../service/session-data.service';
 
 @Component({
     selector: 'app-metar',
@@ -42,14 +44,14 @@ export class MetarComponent implements OnInit {
 
     savedStationIdSets: Array<StationIdSet>;
 
-    userDetails: any = {};
+    userDetails: User = new User();
     loginButtonLabel: string;
 
     @ViewChildren(StationIdSetComponent) stationIdSetComponentReferences: QueryList<StationIdSetComponent>;
 
     @ViewChild(LoginPanelComponent) loginPanelComponent: LoginPanelComponent;
 
-    constructor(private metarService: MetarService, private metarStationIdMvService: MetarStationIdMvService, private messageService: MessageService) { }
+    constructor(private metarService: MetarService, private metarStationIdMvService: MetarStationIdMvService, private messageService: MessageService, public sessionDataService: SessionDataService) { }
 
     ngOnInit(): void {
         this.metarArray = new Array<Metar>();
@@ -82,6 +84,13 @@ export class MetarComponent implements OnInit {
         this.panelNumberSelected = MetarRetrievalMethodEnum.Latest;
 
         this.loginButtonLabel = "Login";
+
+
+        // test begin
+        this.sessionDataService.userSubject.subscribe((user) => {
+            console.log("sessionDataService.userSubject >>>>> " + user.firstName);
+        });
+        // test end
     }
 
     private initSavedstationIdSetNames() {

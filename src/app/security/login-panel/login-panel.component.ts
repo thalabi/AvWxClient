@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AuthenticationService } from '../authentication.service';
 import { User } from '../user';
 import { SessionDataService } from '../../service/session-data.service';
+import { MyMessageService } from '../../message/mymessage.service';
 
 @Component({
     selector: 'app-login-panel',
@@ -13,13 +14,13 @@ export class LoginPanelComponent implements OnInit {
     visible: boolean;
 
     // modal is an input and output argument
-    @Input() userDetails: any = {};
+    @Input() userDetails: User = new User();
     @Output() userDetailsChange: EventEmitter<any> = new EventEmitter();
 
     //model: any = {};
     isProcessingRequest: boolean;
 
-    constructor(private authenticationService: AuthenticationService, private sessionDataService: SessionDataService) { }
+    constructor(private authenticationService: AuthenticationService, private sessionDataService: SessionDataService, private myMessageService: MyMessageService) { }
 
     ngOnInit(): void {
         this.visible = false;
@@ -44,6 +45,7 @@ export class LoginPanelComponent implements OnInit {
                     console.log('user', user);
                     this.sessionDataService.user = user;
                     this.sessionDataService.userSubject.next(user);
+
                     // this.router.navigate([this.returnUrl]);
                     // this.messageService.clear();
                     // this.isPprocessingRequest = false;
@@ -51,6 +53,7 @@ export class LoginPanelComponent implements OnInit {
                 error: () => {
                     // this.isPprocessingRequest = false;
                     console.error('error')
+                    this.myMessageService.error("Unauthorized");
                 }
             });
     }

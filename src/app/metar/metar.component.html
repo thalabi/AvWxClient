@@ -1,6 +1,9 @@
-<app-login-panel [(userDetails)]="userDetails"></app-login-panel>
-<div style="float: right; margin-right: 0.2rem; margin-top: 0.6rem"><button pButton type="button" icon="pi pi-sign-in"
-        (click)="toggleLoginPanel()" [label]="loginButtonLabel"></button></div>
+<!-- <app-login-panel [(userDetails)]="userDetails"></app-login-panel> -->
+<app-login-panel></app-login-panel>
+<div style="float: right; margin-right: 0.2rem; margin-top: 0.6rem">
+    <p-button [icon]="sessionDataService.user ? 'pi pi-user' : 'pi pi-sign-in'" (click)="toggleLoginPanel()"
+        [label]="sessionDataService.user ? sessionDataService.user.firstName : '&nbsp;Login'"></p-button>
+</div>
 <p-tabView (onChange)="setPanelNumberSelected($event)">
     <p-tabPanel header=" Latest">
         <div class="p-grid">

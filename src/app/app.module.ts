@@ -26,10 +26,16 @@ import { TooltipModule } from 'primeng/tooltip';
 import { WindDirectionPipe } from './util/wind-direction-pipe';
 import { DropdownModule } from 'primeng/dropdown';
 import { ToastModule } from 'primeng/toast';
-import { MessageService } from 'primeng/api';
+import { MessageModule } from 'primeng/message';
+
 import { StationIdSetComponent } from './station-id-set/station-id-set.component';
 import { SkyConditionPipe } from './util/sky-condition-pipe';
 import { LoginPanelComponent } from './security/login-panel/login-panel.component';
+import { MessageComponent } from './message/message.component';
+import { MessageService } from 'primeng/api';
+import { MyMessageService } from './message/mymessage.service';
+
+
 
 @NgModule({
     declarations: [
@@ -40,7 +46,8 @@ import { LoginPanelComponent } from './security/login-panel/login-panel.componen
         WindDirectionPipe,
         SkyConditionPipe,
         StationIdSetComponent,
-        LoginPanelComponent
+        LoginPanelComponent,
+        MessageComponent,
     ],
     imports: [
         BrowserModule,
@@ -48,10 +55,10 @@ import { LoginPanelComponent } from './security/login-panel/login-panel.componen
         HttpClientModule,
         FormsModule,
 
-        BrowserAnimationsModule, TableModule, AutoCompleteModule, ButtonModule, CalendarModule, TabViewModule, InputTextModule, TooltipModule, DropdownModule, ToastModule, DialogModule
+        BrowserAnimationsModule, TableModule, AutoCompleteModule, ButtonModule, CalendarModule, TabViewModule, InputTextModule, TooltipModule, DropdownModule, ToastModule, DialogModule, MessageModule
     ],
     providers: [
-        MetarService, MetarStationIdMvService, DatePipe, ConfigService, MessageService,
+        MetarService, MetarStationIdMvService, DatePipe, ConfigService, MessageService, MyMessageService,
         { provide: APP_INITIALIZER, useFactory: configServiceLoadConfig, deps: [ConfigService], multi: true },
 
     ],
