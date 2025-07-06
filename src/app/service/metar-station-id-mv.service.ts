@@ -22,7 +22,7 @@ export class MetarStationIdMvService {
     }
 
     getStationIds(): Observable<Array<MetarStationIdMv>> {
-        let url: string = `${this.serviceUrl}/getStationIds`;
+        let url: string = `${this.serviceUrl}/protected/airportController/getStationIds`;
         console.log(url);
         return this.httpClient.get<Array<MetarStationIdMv>>(url);
     }

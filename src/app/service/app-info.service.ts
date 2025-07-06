@@ -19,7 +19,7 @@ export class AppInfoService {
     }
 
     getServerBuildTimestamp(): Observable<string> {
-        return this.http.get(this.serviceUrl + '/getBuildVersionAndTimestamp', { responseType: "text" });
+        return this.http.get(this.serviceUrl + '/appInfoController/getBuildInfo', { responseType: "text" });
     }
 
 }
