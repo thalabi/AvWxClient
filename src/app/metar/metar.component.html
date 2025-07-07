@@ -69,7 +69,7 @@
             <div class="p-col-2">
                 <p-calendar [(ngModel)]="fromObservationTime" name="fromObservationTime" id="fromObservationTime"
                     #fromObservationTimeField="ngModel" [monthNavigator]="true" showButtonBar="true"
-                    [yearNavigator]="true" yearRange="2000:2050" [dateFormat]="'yy-mm-dd'" [showIcon]="true"
+                    [yearNavigator]="true" yearRange="2016:2050" [dateFormat]="'yy-mm-dd'" [showIcon]="true"
                     [readonlyInput]="true" [showOnFocus]="false" [inputStyle]="{'width':'8rem'}">
                 </p-calendar>
             </div>
@@ -79,7 +79,7 @@
             <div class="p-col-8">
                 <p-calendar [(ngModel)]="toObservationTime" name="toObservationTime" id="toObservationTime"
                     #fromObservationTimeField="ngModel" [monthNavigator]="true" showButtonBar="true"
-                    [yearNavigator]="true" yearRange="2000:2050" [dateFormat]="'yy-mm-dd'" [showIcon]="true"
+                    [yearNavigator]="true" yearRange="2016:2050" [dateFormat]="'yy-mm-dd'" [showIcon]="true"
                     [readonlyInput]="true" [showOnFocus]="false" [inputStyle]="{'width':'8rem'}">
                 </p-calendar>
             </div>
@@ -158,7 +158,8 @@
             <tr>
                 <td>{{ metar.stationId }}</td>
                 <td><span [pTooltip]="metar.rawText" tooltipStyleClass="observation-time-tooltip" tooltipPosition="top"
-                        style="border-bottom: 1px blue dashed">{{ metar.observationTime | date:"yyyy-MM-dd HH:mm" }}</span>
+                        style="border-bottom: 1px blue dashed">{{ metar.observationTime | date:"yyyy-MM-dd HH:mm"
+                        }}</span>
                 </td>
                 <td><span *ngIf="metar.auto">AUTO</span></td>
                 <td>{{ metar.windDirDegrees | windDirection }}/{{ metar.windSpeedKt }}<span

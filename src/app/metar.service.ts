@@ -30,7 +30,8 @@ export class MetarService {
     }
 
     getMetarListForLatestNObservations(stationIds: Array<string>, numberOfObersvations: number): Observable<Array<Metar>> {
-        let stationIdsConcatenated: string = stationIds.join("&stationId=");
+        // let stationIdsConcatenated: string = stationIds.join("&stationId=");
+        let stationIdsConcatenated: string = stationIds.join(",");
         // let url: string = `${this.serviceUrl}/getMetarListForLatestNObservations?stationId=${stationIdsConcatenated}&latestNumberOfMetars=${numberOfObersvations}`;
         let url: string = `${this.serviceUrl}/protected/metarQueryController/getListForLatestNoOfObservations?stationIds=${stationIdsConcatenated}&noOfObservations=${numberOfObersvations}`;
         console.log(url);
